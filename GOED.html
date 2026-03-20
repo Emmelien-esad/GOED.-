@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GOED. – Designed for Arrival</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue: #E9EFFF;
+      --yellow: #FFE787;
+      --green: #DAEDBD;
+      --red: #A50104;
+      --pink: #FFD3E2;
+      --bg: #f7f9fc;
+      --text: #1a1a1a;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
+    body { background:var(--bg); color:var(--text); overflow-x: hidden; }
+
+    nav {
+      position:fixed; top:0; width:100%; display:flex; justify-content:space-between;
+      padding:20px 40px; background:rgba(255,255,255,0.85); backdrop-filter:blur(10px);
+      z-index:1500;
+    }
+    nav a { margin-left:20px; text-decoration:none; color:var(--text); font-weight: 500; }
+    .logo { font-family:'heyam', sans-serif; font-size:28px; }
+
+    /* Algemene sectie stijl */
+    section { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:60px 20px; position:relative; }
+
+    .container {
+      max-width: 1200px; 
+      width: 90%; 
+      background: white; 
+      border-radius: 24px;
+      padding: 40px; 
+      box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 40px;          
+      margin: 0 auto; 
+      position: relative; 
+      z-index: 1;
+    }
+
+    /* 1. DE TOP-VIDEO SECTIE */
+    .top-video {
+      min-height: auto; /* Overschrijf de 100vh */
+      height: 450px; 
+      padding: 0;
+      margin-top: 60px;
+      display: block; /* Geen flexbox hier */
+    }
+    .top-video video { 
+      width: 100%; 
+      height: 100%; 
+      object-fit: cover; 
+      object-position: center 10%;
+      opacity: 0.5;
+    }
+
+    /* 2. DE ABOUT SECTIE FIX */
+    #about {
+      min-height: auto; /* Geen geforceerde 100vh */
+      display: block;   /* Geen flexbox meer die centeren dwingt */
+      padding-top: 0;
+      z-index: 10;
+    }
+
+    #about .container.soft-blue {
+      background-color: var(--blue) !important;
+      margin-top: -180px !important; /* Trek hem krachtig over de video heen */
+      z-index: 11;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    }
+
+    /* Overige stijlen */
+    .step-bullet {
+      font-family: 'heyam', sans-serif;
+      background-color: var(--red);
+      color: white;
+      width: 28px; height: 28px;
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 50%; font-size: 16px; margin-right: 12px; flex-shrink: 0;
+    }
+
+    .part-item { display: flex; align-items: flex-start; margin-bottom: 20px; }
+
+    .font-heyam-small {
+      font-family: 'heyam', sans-serif;
+      font-size: 22px; text-transform: uppercase; display: inline;
+    }
+
+    h1,h2,h3 { font-family:'heyam', sans-serif; line-height: 1.1; }
+    h1{font-size:96px;} h2{font-size:40px;} h3{font-size:28px;}
+    p { font-size:18px; max-width:500px; opacity:0.85; font-family:verdana; line-height: 1.6; }
+
+    .btn { display:inline-block; margin-top:20px; padding:14px 28px; border-radius:30px; background:var(--red); color:white; text-decoration:none; font-weight: 600; }
+    .image, video { width:100%; border-radius:20px; }
+
+    .soft-green { background:rgba(218,237,189,0.3);} 
+    .soft-yellow { background:rgba(255,231,135,0.3);} 
+
+    .color { width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,0.2); }
+    .colors { display:flex; gap:12px; margin:10px 0; }
+
+    .use-block { display:grid; grid-template-columns:1fr 1.4fr; gap:20px; align-items:center; margin-bottom:40px; }
+    .slider { position:relative; }
+    .slide { display:none; width:100%; border-radius:20px; }
+    .slide.active { display:block; }
+    .arrow { position:absolute; top:50%; transform:translateY(-50%); background:rgba(0,0,0,0.4); color:white; border:none; padding:8px 12px; cursor:pointer; border-radius:50%; }
+    .arrow.left { left:10px; } .arrow.right { right:10px; }
+
+    .dynamic-sub { color: var(--red); display: inline-block; font-size: 36px; font-weight: 600; }
+
+    .price-box { display:flex; align-items:center; gap:12px; margin:10px 0; }
+    .price-old { text-decoration:line-through; opacity:0.5; }
+    .price-new { font-size:28px; font-weight:600; color:var(--red); }
+    .price-tag { background:var(--yellow); padding:4px 10px; border-radius:12px; font-size:12px; }
+
+    .shop-reviews-box {
+      margin-top: 30px; background: var(--pink); padding: 25px; border-radius: 20px;
+    }
+    .shop-reviews-box h2 { font-size: 24px; margin-bottom: 20px; }
+    .review-item { 
+      display: flex; align-items: flex-start; gap: 15px; 
+      background: #fff; padding: 15px; border-radius: 16px; 
+      margin-bottom: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .review-item img { width: 45px; height: 45px; border-radius: 50%; object-fit: cover; }
+    .stars { color: #FFD700; font-size: 14px; margin-bottom: 4px; }
+    .review-item p { font-size: 14px; line-height: 1.4; opacity: 1; max-width: 100%; }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">GOED.</div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#problem">Mission</a>
+    <a href="#use">Use</a>
+    <a href="#parts">Parts</a>
+    <a href="#shop">Shop</a>
+    <a href="#shop">Cart</a>
+  </div>
+</nav>
+
+<section class="top-video">
+  <video src="video2.mp4" autoplay muted loop playsinline></video>
+</section>
+
+<section id="about">
+  <div class="container soft-blue">
+    <div>
+      <h1>GOED.</h1>
+      <p><strong><span class="dynamic-sub">Packed good.</span></strong></p>
+      <br>
+      <p><span class="font-heyam-small">GOED.</span> comes from the Dutch word “goed”, meaning both belongings and something good or right, reflecting a product that carries your things and improves everyday living.</p>
+      <br>
+      <p>A simple, multifunctional object that supports Erasmus students during their arrival and first days in their new living space. The solution is a compact product that combines storage and seating in one clear design.</p>
+      <br>
+      <img src="group.jpg" class="image" />
+      <a href="#shop" class="btn">Shop now</a>
+    </div>
+    <img src="hero.jpg" class="image" />
+  </div>
+</section>
+
+<section id="problem">
+  <div class="container soft-green">
+    <div>
+      <h2>Mission of the brand.</h2>
+      <br>
+      <p>Moving to a new country as an Erasmus student is an exciting but also overwhelming experience...</p>
+      <br>
+      <p class="font-heyam-small">What do you do with your suitcase once you’ve unpacked?</p>
+      <br>
+      <p>Instead of hiding it away, <span class="font-heyam-small">GOED.</span> gives it a new function. Transform your luggage into a functional part of your space. Adding comfort, style, and ease to your temporary stay. Designed for arrival, made to improve everyday living.</p>
+      <br>
+      <p class="font-heyam-small">From unnecessary object to functional furniture.</p>
+    </div>
+    <video src="video.mp4" autoplay muted loop></video>
+  </div>
+</section>
+
+<section id="use">
+  <div class="container soft-yellow" style="display:block;">
+    <h2>One object. Multiple roles.</h2>
+    <br>
+    <div class="use-block">
+      <div class="slider">
+        <img src="t1.jpg" class="slide active">
+        <img src="t2.jpg" class="slide">
+        <button class="arrow left">&#10094;</button><button class="arrow right">&#10095;</button>
+      </div>
+      <div>
+        <h3>Shoulder Bag</h3>
+        <br>
+        <p>The top section zips off instantly, transforming into a sleek, oversized shoulder bag for your daily essentials.</p>
+      </div>
+    </div>
+    <div class="use-block">
+      <div class="slider">
+        <img src="t3.jpg" class="slide active">
+        <img src="t4.jpg" class="slide">
+        <button class="arrow left">&#10094;</button><button class="arrow right">&#10095;</button>
+      </div>
+      <div>
+        <h3>Storage Bedside table</h3>
+        <br>
+        <p>The sturdy base serves as a deep storage unit that doubles as a functional bedside table.</p>
+      </div>
+    </div>
+    <div class="use-block">
+      <div class="slider">
+        <img src="t5.jpg" class="slide active">
+        <img src="t6.jpg" class="slide">
+        <button class="arrow left">&#10094;</button><button class="arrow right">&#10095;</button>
+      </div>
+      <div>
+        <h3>Adaptive Seating Cushion</h3>
+        <br>
+        <p>Unfold the top as a premium cushion for your chair to add comfort, or secure it onto the base to create an extra cosy seat.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="parts">
+  <div class="container">
+    <div>
+      <h2>Parts.</h2>
+      <br>
+      <div class="part-item"><span class="step-bullet">a</span><p><b>Shoulder strap</b>: An adjustable, clip-on strap that transforms the fabric top into a portable standalone shoulder bag.</p></div>
+      <div class="part-item"><span class="step-bullet">b</span><p><b>Fabric top part</b>: A versatile soft-shell carrier that doubles as a comfortable cushion chair.</p></div>
+      <div class="part-item"><span class="step-bullet">c</span><p><b>Connecting zipper</b>: A heavy-duty perimeter zipper that securely joins or separates the modules in seconds.</p></div>
+      <div class="part-item"><span class="step-bullet">d</span><p><b>Integrated wooden table</b>: A dual-purpose lid featuring a secondary slide-out panel.</p></div>
+      <div class="part-item"><span class="step-bullet">e</span><p><b>Retractable handle</b>: A telescoping frame that provides effortless mobility and backrest.</p></div>
+      <div class="part-item"><span class="step-bullet">f</span><p><b>Bottom bin</b>: A rugged storage base with a vertical divider.</p></div>
+      <div class="part-item"><span class="step-bullet">g</span><p><b>360° Swivel wheels</b>: Four high-performance casters for smooth movement.</p></div>
+    </div>
+    <img src="exploded.jpg" class="image" />
+  </div>
+</section>
+
+<section id="shop">
+  <div class="container">
+    <img id="productImg" src="product-green.jpg" class="image" />
+    <div>
+      <h2>GOED.</h2>
+      <p>Transformable luggage, designed for temporary living environments.</p>
+      <div class="price-box">
+        <span class="price-old">€199</span>
+        <span class="price-new">€172</span>
+        <span class="price-tag">Limited launch offer</span>
+      </div>
+      <div class="colors">
+        <div class="color" data-img="product-green.jpg" style="background:#DAEDBD"></div>
+        <div class="color" data-img="product-red.jpg" style="background:#E89486"></div>
+        <div class="color" data-img="product-yellow.jpg" style="background:#FFE787"></div>
+      </div>
+      <a class="btn">Add to cart</a>
+      <br><br>
+      <img id="detailImgShop" src="detail-green.jpg" class="image" />
+      <div class="shop-reviews-box">
+        <h2>What users say</h2>
+        <div class="review-item">
+          <img src="user1.jpg">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p>"If your luggage isn’t part of your interior… what is it even doing?"</p>
+            <small><b>Emma L.</b> – Sept 2026</small>
+          </div>
+        </div>
+        <div class="review-item">
+          <img src="user2.jpg">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p>"Unpacked once. Been using it daily ever since."</p>
+            <small><b>Liam S.</b> – March 2026</small>
+          </div>
+        </div>
+        <div class="review-item">
+          <img src="user3.jpg">
+          <div>
+            <div class="stars">★★★★★</div>
+            <p>"Mine became my favorite seat."</p>
+            <small><b>Sophia M.</b> – March 2026</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+const colors = document.querySelectorAll('.color');
+const img = document.getElementById('productImg');
+const detailImg = document.getElementById('detailImgShop');
+colors.forEach(c => {
+  c.addEventListener('click', () => {
+    const src = c.dataset.img;
+    img.src = src;
+    detailImg.src = src.replace('product','detail');
+  });
+});
+document.querySelectorAll('.slider').forEach(slider => {
+  const slides = slider.querySelectorAll('.slide');
+  let index = 0;
+  const show = (i) => {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[i].classList.add('active');
+  };
+  slider.querySelector('.left').onclick = () => { index=(index-1+slides.length)%slides.length; show(index); };
+  slider.querySelector('.right').onclick = () => { index=(index+1)%slides.length; show(index); };
+});
+const subtitles = ["Packed good.","Living good."];
+let subIndex = 0;
+const subEl = document.querySelector('.dynamic-sub');
+setInterval(()=>{ subIndex=(subIndex+1)%subtitles.length; subEl.textContent=subtitles[subIndex]; },1500);
+</script>
+</body>
+</html>

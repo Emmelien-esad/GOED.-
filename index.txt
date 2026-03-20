@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GOED. – Designed for Arrival</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #BCD3F2;
+      --yellow: #FFE787;
+      --green: #DAEDBD;
+      --red: #A50104;
+      --bg: #f7f9fc;
+      --text: #1a1a1a;
+    }
+
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Inter', sans-serif; }
+
+    body { background:var(--bg); color:var(--text); }
+
+    nav {
+      position:fixed; top:0; width:100%; display:flex; justify-content:space-between;
+      padding:20px 40px; background:rgba(255,255,255,0.85); backdrop-filter:blur(10px);
+      z-index:1000;
+    }
+
+    nav a { margin-left:20px; text-decoration:none; color:var(--text); }
+
+    .logo { font-family:'heyam', sans-serif; font-size:22px; }
+
+    section { min-height:100vh; display:flex; align-items:center; justify-content:center; padding:120px 20px 60px; }
+
+    .container {
+      max-width:1300px; width:100%; background:white; border-radius:24px;
+      padding:60px; box-shadow:0 20px 40px rgba(0,0,0,0.05);
+      display:grid; grid-template-columns:1fr 1fr; gap:60px;
+    }
+
+    h1,h2,h3 { font-family:'heyam', sans-serif; }
+    h1{font-size:64px;} h2{font-size:40px;} h3{font-size:22px;}
+
+    p { font-size:18px; max-width:500px; opacity:0.85; font-family:verdana }
+
+    .btn {
+      display:inline-block; margin-top:20px; padding:14px 28px;
+      border-radius:30px; background:var(--red); color:white; text-decoration:none;
+    }
+
+    .image, video { width:100%; border-radius:20px; }
+
+    .soft-blue { background:rgba(188,211,242,0.2);} 
+    .soft-green { background:rgba(218,237,189,0.3);} 
+    .soft-yellow { background:rgba(255,231,135,0.3);} 
+
+    .grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+    .column { display:flex; flex-direction:column; gap:15px; }
+
+    .color {
+      width:26px; height:26px; border-radius:50%; cursor:pointer;
+      border:2px solid #fff; box-shadow:0 0 0 1px rgba(0,0,0,0.2);
+    }
+
+    .colors { display:flex; gap:12px; margin:10px 0; }
+
+    /* HERO VIDEO */
+    .top-video {
+      width:100%;
+      height:100vh;
+      overflow:hidden;
+    }
+
+    .top-video video {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+    }
+
+    .hero-video {
+      position:absolute;
+      top:0; left:0;
+      width:100%; height:100%;
+      z-index:0;
+      border-radius:24px;
+      overflow:hidden;
+    }
+
+    .hero-video video {
+      width:100%; height:100%;
+      object-fit:cover;
+      opacity:0.25;
+    }
+
+    .hero-content {
+      position:relative;
+      z-index:1;
+    }
+
+    /* PRICE */
+    .price-box {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin:10px 0;
+    }
+
+    .price-old {
+      text-decoration:line-through;
+      opacity:0.5;
+    }
+
+    .price-new {
+      font-size:28px;
+      font-weight:600;
+      color:var(--red);
+    }
+
+    .price-tag {
+      background:var(--yellow);
+      padding:4px 10px;
+      border-radius:12px;
+      font-size:12px;
+    }
+
+    /* REVIEWS */
+    .reviews {
+      display:flex;
+      flex-direction:column;
+      gap:20px;
+      margin-top:30px;
+    }
+
+    .review {
+      display:flex;
+      align-items:center;
+      gap:15px;
+      background:#fff;
+      padding:15px;
+      border-radius:16px;
+      box-shadow:0 10px 20px rgba(0,0,0,0.05);
+    }
+
+    .review img {
+      width:50px;
+      height:50px;
+      border-radius:50%;
+      object-fit:cover;
+    }
+
+    .review small {
+      opacity:0.6;
+      font-size:12px;
+    }
+
+    .stars {
+      color:#FFD700;
+      font-size:14px;
+    }
+
+    /* USE sliders */
+    .use-block {
+      display:grid;
+      grid-template-columns:1fr 1.4fr;
+      gap:20px;
+      align-items:center;
+      margin-bottom:40px;
+    }
+
+    .slider {
+      position:relative;
+    }
+
+    .slide {
+      display:none;
+      width:100%;
+      border-radius:20px;
+    }
+
+    .slide.active {
+      display:block;
+    }
+
+    .arrow {
+      position:absolute;
+      top:50%;
+      transform:translateY(-50%);
+      background:rgba(0,0,0,0.4);
+      color:white;
+      border:none;
+      padding:8px 12px;
+      cursor:pointer;
+      border-radius:50%;
+    }
+
+    .arrow.left { left:10px; }
+    .arrow.right { right:10px; }
+
+  </style>
+</head>
+<body>
+
+<!-- TOP VIDEO -->
+<section class="top-video">
+  <video src="video.mp4" autoplay muted loop playsinline></video>
+</section>
+
+<nav>
+  <div class="logo">GOED.</div>
+  <div>
+    <a href="#about">About</a>
+    <a href="#problem">Problem</a>
+    <a href="#use">Use</a>
+    <a href="#parts">Parts</a>
+    <a href="#shop">Shop</a>
+    <a href="#shop">Cart</a>
+  </div>
+</nav>
+
+<!-- HERO / BRAND -->
+<section id="about">
+  <div class="container soft-blue">
+    <div>
+      <h1>goed.</h1>
+      <p><strong>Packed good. Living good.</strong></p>
+      <br>
+      <p>GOED. comes from the Dutch word “goed”, meaning both belongings and something good or right, reflecting a product that carries your things and improves everyday living.</p>
+      <br>
+      <p>A simple, multifunctional object that supports Erasmus students during their arrival and first days in their new living space. The solution is a compact product that combines storage and seating in one clear design.</p>
+      <br>
+      <img src="group.jpg" class="image" />
+      <a href="#shop" class="btn">Shop now</a>
+    </div>
+    <img src="hero.jpg" class="image" />
+  </div>
+</section>
+
+<!-- PROBLEM PAGE -->
+<section id="problem">
+  <div class="container soft-green">
+    <div>
+      <h2>From unnecessary object to functional furniture.</h2>
+      <br>
+      <p>Moving to a new country as an Erasmus student is an exciting but also overwhelming experience. Students often arrive in unfamiliar cities and temporary student housing where they must quickly adapt to a new environment, culture, and daily routine.These living spaces are typically compact and minimally furnished, designed for short-term stays rather than long-term comfort. As a result, students must organize their belongings and create a livable personal space within very limited conditions.</p>
+      <br>
+      <p>One common issue that arises during this transition is the presence of luggage. Erasmus students usually travel with one or more suitcases containing most of their belongings for the entire stay. Once they arrive and unpack, these suitcases often become an awkward object within the room. As a result, it often remains visible in the room, taking up valuable floor space and contributing to a cluttered environment.</p>
+      <br>
+      <p>GOED.offers a solution for both of these problems by creating a simple, multifunctional object that supports students during their travel, arrival and first days in their new living space.</p>
+    </div>
+    <video src="video.mp4" autoplay muted loop></video>
+  </div>
+</section>
+
+<!-- TRANSFORMATIONS -->
+<section id="use">
+  <div class="container soft-yellow" style="display:block;">
+
+    <!-- BAG -->
+    <div class="use-block">
+      <div class="slider">
+        <img src="t1.jpg" class="slide active">
+        <img src="t2.jpg" class="slide">
+        <button class="arrow left">&#10094;</button>
+        <button class="arrow right">&#10095;</button>
+      </div>
+      <div>
+        <h3>Bag</h3>
+        <p><b>Shoulder Bag</b>: The top section zips off instantly, transforming into a sleek, oversized shoulder bag for your daily essentials.</p>
+      </div>
+    </div>
+
+    <!-- STORAGE TABLE -->
+    <div class="use-block">
+      <div class="slider">
+        <img src="t3.jpg" class="slide active">
+        <img src="t4.jpg" class="slide">
+        <button class="arrow left">&#10094;</button>
+        <button class="arrow right">&#10095;</button>
+      </div>
+      <div>
+        <h3>Storage table</h3>
+        <p><b>Smart Bedside Storage</b>: The sturdy base serves as a deep storage unit that doubles as a functional bedside table.</p>
+      </div>
+    </div>
+
+    <!-- CUSHION -->
+    <div class="use-block">
+      <div class="slider">
+        <img src="t5.jpg" class="slide active">
+        <img src="t6.jpg" class="slide">
+        <button class="arrow left">&#10094;</button>
+        <button class="arrow right">&#10095;</button>
+      </div>
+      <div>
+        <h3>Cushion</h3>
+        <p><b>Adaptive Seating</b>: Unfold the top as a premium cushion for your chair to add comfort, or secure it onto the base to create an extra cosy seat.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section id="parts">
+  <div class="container">
+    <div>
+      <h2>One object. Multiple roles.</h2>
+      <br>
+      <p><b>Shoulder strap</b>: An adjustable, clip-on strap that transforms the fabric top into a portable standalone shoulder bag.</p>
+      <br>
+      <p><b>Fabric top part</b>: A versatile soft-shell carrier that doubles as a comfortable cushion chair when placed on the base.</p>
+      <br>
+      <p><b>Connecting zipper</b>: A heavy-duty perimeter zipper that securely joins or separates the top and bottom modules in seconds.</p>
+      <br>
+      <p><b>Integrated wooden table</b>: A dual-purpose lid featuring a secondary slide-out panel to instantly double your workspace.</p>
+      <br>
+      <p><b>Retractable handle</b>: A telescoping frame that provides effortless mobility and serves as a sturdy backrest in seating mode.</p>
+      <br>
+      <p><b>Bottom bin</b>: A rugged storage base with a vertical divider to keep your heavier essentials organized and protected.</p>
+      <br>
+      <p><b>360° Swivel wheels</b>: Four high-performance casters that ensure smooth, multi-directional movement on any surface.</p>
+    </div>
+    <img src="exploded.jpg" class="image" />
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop">
+  <div class="container">
+    <img id="productImg" src="product-green.jpg" class="image" />
+    <div>
+      <h2>GOED.</h2>
+      <p>Transformable luggage, designed for temporary living environments.</p>
+
+      <div class="price-box">
+        <span class="price-old">€199</span>
+        <span class="price-new">€172</span>
+        <span class="price-tag">Limited launch offer</span>
+      </div>
+
+      <div class="colors">
+        <div class="color" style="background:#DAEDBD"></div>
+        <div class="color" style="background:#E89486"></div>
+        <div class="color" style="background:#FFE787"></div>
+      </div>
+
+      <a class="btn">Add to cart</a>
+
+      <br><br>
+      <img src="detail.jpg" class="image" />
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section>
+  <div class="container" style="display:block;">
+    <h2>What users say</h2>
+
+    <div class="reviews">
+      <div class="review">
+        <img src="user1.jpg">
+        <div>
+          <div class="stars">★★★★★</div>
+          <p>"This changed my Erasmus experience."</p>
+          <small><b>Emma L.</b> – March 2026</small>
+        </div>
+      </div>
+      <div class="review">
+        <img src="user2.jpg">
+        <div>
+          <div class="stars">★★★★★</div>
+          <p>"Love this suitcase design!"</p>
+          <small><b>Liam S.</b> – March 2026</small>
+        </div>
+      </div>
+      <div class="review">
+        <img src="user3.jpg">
+        <div>
+          <div class="stars">★★★★★</div>
+          <p>"Perfect for stylish travelers."</p>
+          <small><b>Sophia M.</b> – March 2026</small>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+const colors = document.querySelectorAll('.color');
+const img = document.getElementById('productImg');
+
+const map = {
+  "rgb(218, 237, 189)": "product-green.jpg",
+  "rgb(232, 148, 134)": "product-red.jpg",
+  "rgb(255, 231, 135)": "product-yellow.jpg"
+};
+
+colors.forEach(c => {
+  c.addEventListener('click', () => {
+    const col = getComputedStyle(c).backgroundColor;
+    if(map[col]) img.src = map[col];
+  });
+});
+
+// Slider functionality
+document.querySelectorAll('.slider').forEach(slider => {
+  const slides = slider.querySelectorAll('.slide');
+  let index = 0;
+
+  const show = (i) => {
+    slides.forEach(s => s.classList.remove('active'));
+    slides[i].classList.add('active');
+  };
+
+  slider.querySelector('.left').onclick = () => {
+    index = (index - 1 + slides.length) % slides.length;
+    show(index);
+  };
+
+  slider.querySelector('.right').onclick = () => {
+    index = (index + 1) % slides.length;
+    show(index);
+  };
+});
+</script>
+
+</body>
+</html>
